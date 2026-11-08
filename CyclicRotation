@@ -1,0 +1,23 @@
+def solution(A, K):
+    """
+    Rotates array A to the right K times and returns the resulting array.
+    """
+
+    # If the array is empty, there is nothing to rotate
+    if len(A) == 0:
+        return A
+
+    # Reduce K in case it is larger than the length of the array
+    K = K % len(A)
+
+    # Move the last K elements to the front
+    rotated_array = A[-K:] + A[:-K]
+
+    # Return the rotated array
+    return rotated_array
+
+
+# Test cases
+print(solution([3, 8, 9, 7, 6], 3))
+print(solution([0, 0, 0], 1))
+print(solution([1, 2, 3, 4], 4))
