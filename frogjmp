@@ -1,0 +1,25 @@
+def solution(X, Y, D):
+    """
+    Returns the minimum number of jumps needed for a frog
+    to move from position X to a position greater than or
+    equal to Y using jumps of length D.
+    """
+
+    # Calculate the total distance the frog must travel
+    distance = Y - X
+
+    # If the distance is exactly divisible by D,
+    # no extra jump is needed
+    if distance % D == 0:
+        jumps = distance // D
+    else:
+        # Otherwise, add one extra jump
+        jumps = distance // D + 1
+
+    return jumps
+
+
+# Test cases
+print(solution(10, 85, 30))
+print(solution(10, 10, 30))
+print(solution(1, 100, 25))
