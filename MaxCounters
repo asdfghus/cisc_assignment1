@@ -1,0 +1,53 @@
+def solution(N, A):
+    """
+    Returns the final values of N counters after
+    performing all operations in array A.
+    """
+
+    # Create N counters initialized to 0
+    counters = [0] * N
+
+    # Stores the highest counter value seen so far
+    max_value = 0
+
+    # Stores the baseline value for all counters
+    min_value = 0
+
+    # Process each operation
+    for operation in A:
+
+        # Increase(X) operation
+        if 1 <= operation <= N:
+
+            index = operation - 1
+
+            # Bring the counter up to date if needed
+            if counters[index] < min_value:
+                counters[index] = min_value
+
+            # Increase the selected counter
+            counters[index] += 1
+
+            # Update the maximum counter value
+            if counters[index] > max_value:
+                max_value = counters[index]
+
+        # Max counter operation
+        else:
+            # Delay updating all counters
+            min_value = max_value
+
+    # Update any counters that were never brought up to min_value
+    for i in range(N):
+        if counters[i] < min_value:
+            counters[i] = min_value
+
+    return counters
+
+
+# Test case from the question
+print(solution(5, [3, 4, 4, 6, 1, 4, 4]))
+
+# Additional tests
+print(solution(1, [1]))
+print(solution(3, [1, 4, 2, 2]))
