@@ -1,0 +1,36 @@
+def solution(A):
+    """
+    Counts the number of passing car pairs.
+    Returns -1 if the number of pairs exceeds 1,000,000,000.
+    """
+
+    # Count of cars traveling east (0)
+    east_cars = 0
+
+    # Total number of passing pairs
+    passing_pairs = 0
+
+    # Examine each car in the array
+    for car in A:
+
+        # Eastbound car
+        if car == 0:
+            east_cars += 1
+
+        # Westbound car
+        else:
+            # Each westbound car passes every eastbound car
+            # that appeared before it
+            passing_pairs += east_cars
+
+            # Return -1 if the limit is exceeded
+            if passing_pairs > 1_000_000_000:
+                return -1
+
+    return passing_pairs
+
+
+# Test cases
+print(solution([0, 1, 0, 1, 1]))
+print(solution([0, 0, 1, 1]))
+print(solution([1, 1, 1]))
